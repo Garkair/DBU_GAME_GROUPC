@@ -123,13 +123,13 @@ LEVEL_DATA = [
             _make_tile_strip(0,   460, 90, 'S') +
             # Tables (wide flat platforms)
             _make_tile_strip(200, 400, 6, 'S') +
-            _make_tile_strip(500, 360, 5, 'S') +
-            _make_tile_strip(900, 320, 6, 'S') +
-            _make_tile_strip(1300,280, 4, 'S') +
-            _make_tile_strip(1700,320, 5, 'S') +
+            _make_tile_strip(600, 360, 5, 'S') +
+            _make_tile_strip(900, 350, 6, 'S') +
+            _make_tile_strip(1300,300, 4, 'S') +
+            _make_tile_strip(1750,320, 5, 'S') +
             _make_tile_strip(2100,260, 4, 'S') +
-            _make_tile_strip(2500,200, 5, 'S') +
-            _make_tile_strip(2900,260, 6, 'S') +
+            _make_tile_strip(2400,250, 5, 'S') +
+            _make_tile_strip(2700,260, 6, 'S') +
             _make_tile_strip(3200,320, 5, 'S')
         ),
         "chips":  [(250, 370), (1320, 250), (2520, 170)],
