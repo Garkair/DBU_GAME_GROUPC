@@ -9,9 +9,9 @@ FPS           = 60
 TITLE         = "Operation DBU: Reloaded"
 
 # Physics
-GRAVITY        = 0.50
+GRAVITY        = 0.55
 JUMP_FORCE     = -13
-PLAYER_SPEED   = 4.5
+PLAYER_SPEED   = 4
 
 # Tile / grid
 TILE_SIZE = 40

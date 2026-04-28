@@ -49,3 +49,9 @@ class HUD:
         # DBU branding
         brand = self.font_sm.render("DBU OPERATION", True, C_ACCENT)
         surface.blit(brand, (SCREEN_WIDTH - brand.get_width() - 10, 16))
+
+        # Mute indicator  [M]
+        from . import audio_manager as audio
+        if not audio.is_enabled():
+            mute = self.font_sm.render("[M] MUTED", True, (200, 80, 80))
+            surface.blit(mute, (SCREEN_WIDTH - mute.get_width() - 10, 32))

@@ -9,6 +9,7 @@ from .collectibles import AccessChip, PatriotToken, ExitPortal
 from .levels      import LEVEL_DATA, build_tiles
 from .hud         import HUD
 from .background_loader import preload_all, get_status as bg_status
+from . import audio_manager as audio
 from .screens     import (draw_title_screen, draw_mission_briefing,
                           draw_game_over, draw_victory,
                           draw_level_complete, draw_background)
@@ -33,6 +34,8 @@ class Game:
         pygame.display.set_caption(TITLE)
         self.clock  = pygame.time.Clock()
         preload_all()  # scan backgrounds/ folder at startup
+        audio.init()    # start mixer, preload SFX
+        audio.play_opening()
         self.hud    = HUD()
         self.state  = STATE_TITLE
         self.tick   = 0
@@ -86,6 +89,7 @@ class Game:
 
         self.camera_x        = 0
         self.chips_collected = 0
+        # Music is triggered by the caller (briefing → play, warp → play immediately)
 
     # ── debug menu ─────────────────────────────────────────
     def _toggle_debug(self):
@@ -99,6 +103,7 @@ class Game:
         self._load_level(index)
         self.state      = STATE_PLAYING
         self.debug_open = False
+        audio.play_level_bgm(index)   # warp skips briefing, go straight to BGM
 
     def _draw_debug_menu(self):
         """Overlay the level-select debug panel on top of whatever is on screen."""
@@ -219,14 +224,20 @@ class Game:
             p.score += SCORE_LEVEL
             self.total_score = p.score
             if self.level_index >= len(LEVEL_DATA) - 1:
+                audio.play_game_completion()
                 self.state = STATE_VICTORY
             else:
-                self.state = STATE_LEVEL_DONE
+                audio.play_level_complete()
+            self.state = STATE_LEVEL_DONE
 
     def _check_enemies(self):
         for enemy in self.enemies:
             if self.player.rect.colliderect(enemy.rect):
+                was_invincible = self.player.invincible > 0
                 self.player.hit()
+                # Only play SFX when the hit actually registered
+                if not was_invincible:
+                    audio.play_hit_sfx(enemy)
 
     def _check_fall_death(self):
         if self.player.rect.top > SCREEN_HEIGHT + 80:
@@ -254,6 +265,9 @@ class Game:
                     # G toggles debug menu from any game state
                     if event.key == pygame.K_g:
                         self._toggle_debug()
+                    elif event.key == pygame.K_m:
+                        muted = audio.toggle_mute()
+                        print("[Audio] " + ("Muted" if muted else "Unmuted"))
 
                     elif self.debug_open:
                         # All input inside the menu
@@ -284,20 +298,25 @@ class Game:
 
             pygame.display.flip()
 
+        audio.quit()
         pygame.quit()
 
     def _handle_enter(self):
         if self.state == STATE_TITLE:
             self.state = STATE_BRIEFING
+            audio.play_level_intro(self.level_index)
         elif self.state == STATE_BRIEFING:
             self.state = STATE_PLAYING
+            audio.play_level_bgm(self.level_index)
         elif self.state == STATE_LEVEL_DONE:
             self.level_index += 1
             self._load_level(self.level_index)
             self.state = STATE_BRIEFING
+            audio.play_level_intro(self.level_index)
         elif self.state in (STATE_GAME_OVER, STATE_VICTORY):
             self._reset_game()
             self.state = STATE_TITLE
+            audio.play_opening()
 
     def _update(self):
         self.player.update(self.tiles)
