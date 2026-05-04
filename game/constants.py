@@ -3,13 +3,13 @@
 # ─────────────────────────────────────────────────────────────
 
 # Window
-SCREEN_WIDTH  = 960
+SCREEN_WIDTH  = 1080
 SCREEN_HEIGHT = 540
 FPS           = 60
 TITLE         = "Operation DBU: Reloaded"
 
 # Physics
-GRAVITY        = 0.55
+GRAVITY        = 0.5
 JUMP_FORCE     = -13
 PLAYER_SPEED   = 4
 

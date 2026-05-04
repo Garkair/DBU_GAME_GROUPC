@@ -169,13 +169,30 @@ def make_stone_tile():
 
 
 def make_shelf_tile():
+    """Bookshelf tile – wood frame + 4 book spines that tile seamlessly."""
     s = _surf(TILE_SIZE, TILE_SIZE, alpha=False)
+    # Wood backing
     s.fill(C_SHELF)
-    pygame.draw.rect(s, (100, 70, 30), (0, 0, TILE_SIZE, TILE_SIZE), 1)
-    # book spines
-    colors = [(180, 40, 40), (40, 80, 180), (40, 140, 60), (180, 140, 20)]
-    for i, c in enumerate(colors):
-        pygame.draw.rect(s, c, (i * 10 + 1, 4, 8, TILE_SIZE - 8))
+    # Top and bottom shelf boards (solid, connect across tiles)
+    pygame.draw.rect(s, (100, 65, 25), (0, 0,          TILE_SIZE, 5))   # top board
+    pygame.draw.rect(s, (100, 65, 25), (0, TILE_SIZE-5, TILE_SIZE, 5))   # bottom board
+    # Side edge only on left so tiles join seamlessly on the right
+    pygame.draw.rect(s, (80, 50, 15), (0, 0, 3, TILE_SIZE))
+    # Book spines – taller to fill between boards
+    book_colors = [
+        (190, 40,  40),   # red
+        ( 40, 90, 190),   # blue
+        ( 40, 150, 60),   # green
+        (190, 150, 20),   # yellow
+    ]
+    bw = (TILE_SIZE - 3) // len(book_colors)
+    for i, c in enumerate(book_colors):
+        bx = 3 + i * bw
+        pygame.draw.rect(s, c, (bx, 5, bw - 1, TILE_SIZE - 10))
+        # Highlight on spine top
+        pygame.draw.rect(s, tuple(min(v+60,255) for v in c), (bx, 5, bw-1, 3))
+        # Dark gap between books
+        pygame.draw.rect(s, (30, 20, 10), (bx + bw - 1, 5, 1, TILE_SIZE - 10))
     return s
 
 

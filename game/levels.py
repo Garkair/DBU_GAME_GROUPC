@@ -35,6 +35,7 @@ LEVEL_DATA = [
 
     # ── LEVEL 1  Entrance / Mountain Creek Parkway ────────────
     {
+        "index":   0,
         "name":    "Level 1 – Entrance: Mountain Creek Pkwy",
         "mission": "Agent Patriot, the campus system has been compromised.\nGain access through the main entrance.",
         "bg_color": C_BG_SKY,
@@ -73,6 +74,7 @@ LEVEL_DATA = [
 
     # ── LEVEL 2  Collins Learning Center ─────────────────────
     {
+        "index":   1,
         "name":    "Level 2 – Collins Learning Center",
         "mission": "Agent Patriot, recover the data files inside\nthe Learning Center to restore system access.",
         "bg_color": C_BG_INDOOR,
@@ -113,6 +115,7 @@ LEVEL_DATA = [
 
     # ── LEVEL 3  Mahler Student Center ───────────────────────
     {
+        "index":   2,
         "name":    "Level 3 – Mahler Student Center",
         "mission": "Agent Patriot, stabilize the system nodes in\nthe Student Center before the network collapses.",
         "bg_color": C_BG_INDOOR,
@@ -123,13 +126,14 @@ LEVEL_DATA = [
             _make_tile_strip(0,   460, 90, 'S') +
             # Tables (wide flat platforms)
             _make_tile_strip(200, 400, 6, 'S') +
-            _make_tile_strip(600, 360, 5, 'S') +
-            _make_tile_strip(900, 350, 6, 'S') +
-            _make_tile_strip(1300,300, 4, 'S') +
-            _make_tile_strip(1750,320, 5, 'S') +
-            _make_tile_strip(2100,260, 4, 'S') +
-            _make_tile_strip(2400,250, 5, 'S') +
-            _make_tile_strip(2700,260, 6, 'S') +
+            _make_tile_strip(500, 360, 5, 'S') +
+            _make_tile_strip(900, 320, 6, 'S') +
+            _make_tile_strip(1300,280, 4, 'S') +
+            _make_tile_strip(1700,320, 5, 'S') +
+            _make_tile_strip(2100,260, 5, 'S') +
+            _make_tile_strip(2300,260, 1, 'S') +
+            _make_tile_strip(2500,200, 5, 'S') +
+            _make_tile_strip(2900,260, 6, 'S') +
             _make_tile_strip(3200,320, 5, 'S')
         ),
         "chips":  [(250, 370), (1320, 250), (2520, 170)],
@@ -154,6 +158,7 @@ LEVEL_DATA = [
 
     # ── LEVEL 4  Dorm Zone ────────────────────────────────────
     {
+        "index":   3,
         "name":    "Level 4 – Dorm Zone",
         "mission": "Agent Patriot, navigate the residential zone\nand secure the remaining access points.",
         "bg_color": C_BG_DORM,
@@ -207,6 +212,7 @@ LEVEL_DATA = [
 
     # ── LEVEL 5  Control Center (Final) ──────────────────────
     {
+        "index":   4,
         "name":    "Level 5 – Final Mission: Control Center",
         "mission": "Agent Patriot, this is the final system core.\nRestore control and save the campus!",
         "bg_color": C_BG_FINAL,
