@@ -337,9 +337,9 @@ def draw_background(surface, level_data, camera_x, tick):
     if photo is not None:
         photo = pygame.transform.scale(photo, (4100, BG_H))
         parallax_x = int(camera_x * (4100 - SCREEN_WIDTH) / 4100)
-        surface.blit(photo, (-parallax_x-200, HUD_HEIGHT))
+        surface.blit(photo, (-parallax_x-400, HUD_HEIGHT))
         if parallax_x > 0:
-            surface.blit(photo, (-parallax_x-200, HUD_HEIGHT))
+            surface.blit(photo, (-parallax_x-400, HUD_HEIGHT))
         tint = pygame.Surface((SCREEN_WIDTH, BG_H), pygame.SRCALPHA)
         tint.fill((0, 0, 0, 60))
         surface.blit(tint, (0, HUD_HEIGHT))
